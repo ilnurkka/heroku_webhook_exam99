@@ -30,7 +30,7 @@ def get_message():
 def webhook():
     bot.remove_webhook()
     bot.set_webhook(url=APP_URL)
-
+    bot.remove_webhook()
     return '!', 200
 
 
