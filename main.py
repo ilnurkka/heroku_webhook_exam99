@@ -28,8 +28,9 @@ def get_message():
 
 @server.route('/')
 def webhook():
-    bot.remove_webhook()
+    #bot.remove_webhook()
     bot.set_webhook(url=APP_URL)
+    bot.remove_webhook()
     return '!', 200
 
 
