@@ -11,12 +11,14 @@ server = Flask(__name__)
 @bot.message_handler(commands=['start'])
 def start(message):
     bot.reply_to(message, 'Hello, ' + message.from_user.first_name)
-
+    bot.remove_webhook()
+    bot.set_webhook(url=APP_URL)
 
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def echo(message):
     bot.reply_to(message, message.text)
-
+    bot.remove_webhook()
+    bot.set_webhook(url=APP_URL)
 
 @server.route('/' + TOKEN, methods=['POST'])
 def get_message():
@@ -28,9 +30,9 @@ def get_message():
 
 @server.route('/')
 def webhook():
-    #bot.remove_webhook()
-    bot.set_webhook(url=APP_URL)
     bot.remove_webhook()
+    bot.set_webhook(url=APP_URL)
+
     return '!', 200
 
 
